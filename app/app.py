@@ -75,6 +75,15 @@ def create_account():
     return jsonify({'errors': form.errors})
 
 
+@app.route('/gettotal', methods=['POST', 'GET'])
+def gettotal():
+    users = Users.query.all()
+    total_users = len(users)
+    recipes = Recipes.query.all()
+    total_recipes = len(recipes)
+    return jsonify({'total_users': total_users, 'total_recipes': total_recipes})
+
+
 @app.route("/signin", methods=["POST"])
 def signin():
     data = request.get_json()
@@ -283,14 +292,14 @@ def singlerecipedata(post_id):
 #     return jsonify(sending)
 
 
-@app.route('/test_user')
-@login_required
-def test_user():
-    # logout_user()
-    user = current_user
-    print('============', current_user.id)
+# @app.route('/test_user')
+# @login_required
+# def test_user():
+#     # logout_user()
+#     user = current_user
+#     print('============', current_user.id)
 
-    return jsonify({'user': 'ok'})
+#     return jsonify({'user': 'ok'})
 
 
 @app.route('/postliked', methods=['GET', 'POST'])
