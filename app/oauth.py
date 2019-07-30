@@ -45,8 +45,8 @@ def facebook_logged_in(blueprint, token):
     else:
         # Create a new local user account for this user
         user = Users(name=info["name"],
-                     email=info['email'],
-                     provider_pic=info['public_profile'])
+                     email=info['email']
+                     )
         # Associate the new local user account with the OAuth token
         oauth.user = user
         # Save and commit our database models
