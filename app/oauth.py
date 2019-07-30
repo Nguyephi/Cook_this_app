@@ -64,7 +64,7 @@ def facebook_logged_in(blueprint, token):
         token = Token(user_id=current_user.id, uuid=uuid.uuid4().hex)
         db.session.add(token)
         db.session.commit()
-    return redirect(f'http://localhost:3000/?api_key={token.uuid}')
+    return redirect(f'https://cookthis.netlify.com/?api_key={token.uuid}')
 
 
 # notify on OAuth provider error
