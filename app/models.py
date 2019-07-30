@@ -7,6 +7,12 @@ from datetime import datetime
 db = SQLAlchemy()
 
 
+class UserVisit(db.Model):
+    __tablename__ = 'uservisit'
+    id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+
+
 class Subscribe(db.Model):
     __tablename__ = 'subscribe'
     # id = db.Column(db.Integer, primary_key=True)

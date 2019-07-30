@@ -3,11 +3,11 @@ from flask import Flask, render_template, flash, redirect, url_for, request, jso
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, current_user, login_required, logout_user, login_user
 from flask_migrate import Migrate
-from models import db, login_manager, Users, Token, Recipes, Ingredients, Instructions, isLikes, Subscribe, Comments
-from forms import SignUpForm, CreateRecipeForm
-from oauth import blueprint
-from config import Config
-from cli import create_db
+from .models import db, login_manager, Users, Token, Recipes, Ingredients, Instructions, isLikes, Subscribe, Comments
+from .forms import SignUpForm, CreateRecipeForm
+from .oauth import blueprint
+from .config import Config
+from .cli import create_db
 from flask_cors import CORS
 import wtforms_json
 import json
@@ -26,16 +26,20 @@ login_manager.init_app(app)
 app.register_blueprint(blueprint, url_prefix="/login")
 app.cli.add_command(create_db)
 
-POSTGRES = {
-    'user': os.environ['POSTGRES_USER'],
-    'pw': os.environ['POSTGRES_PWD'],
-    'db': os.environ['POSTGRES_DB'],
-    'host': os.environ['POSTGRES_HOST'],
-    'port': os.environ['POSTGRES_PORT'],
-}
+# POSTGRES = {
+#     'user': os.environ['POSTGRES_USER'],
+#     'pw': os.environ['POSTGRES_PWD'],
+#     'db': os.environ['POSTGRES_DB'],
+#     'host': os.environ['POSTGRES_HOST'],
+#     'port': os.environ['POSTGRES_PORT'],
+# }
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://%(user)s:%(pw)s@%(host)s:\
-%(port)s/%(db)s' % POSTGRES
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://%(user)s:%(pw)s@%(host)s:\
+# %(port)s/%(db)s' % POSTGRES
+# print(app.config['SQLALCHEMY_DATABASE_URI'])
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+# db = SQLAlchemy(app)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 

@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from flask_login import current_user
 from wtforms.fields import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, DataRequired, ValidationError
-from models import Users
+from .models import Users
 
 
 class SignUpForm(FlaskForm):

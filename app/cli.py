@@ -1,6 +1,6 @@
 import click
 from flask.cli import with_appcontext
-from models import db
+from .models import db
 
 
 @click.command(name="createdb")
